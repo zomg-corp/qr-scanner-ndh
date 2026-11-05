@@ -1,18 +1,39 @@
 > [!NOTE]
-> forked and maintained by **npm-dependency-hell**
+> forked and maintained by **zomg-corp**
 # QR Scanner (FORK)
 
 ## This fork
 
 - The decoder is [`src/jsqr`](src/jsqr/README.md), a copy of jsQR's "modernize" branch with a 100 ms per-call time
   budget. It replaces the `jsqr-es6` dependency. Its README lists the provenance and the local changes.
-- The endticket admin installs this repository from a GitHub tag tarball
-  (`github:zomg-corp/qr-scanner-ndh#<tag>`) and compiles `src/` from source under TypeScript `strict`.
-  So `src/` must pass `yarn typecheck`, which is `strict` too. CI runs it on every push.
 - Installing builds nothing: there is no `prepare` or `postinstall` script. The committed `*.min.js` bundles must
   match `src/`; CI rebuilds them and fails on a difference (sourcemaps excepted: one identifier in them is random).
-- Release: bump `version` in `package.json`, merge to `main`, push a tag `v<version>`.
-- The release tarball leaves out `test/` (`.gitattributes`), which holds jsQR's test corpus.
+- The tarball leaves out `test/` (`.gitattributes`), which holds jsQR's test corpus.
+
+### What the endticket admin depends on
+
+The endticket admin (`frontend/admin` in the endticket monorepo) installs this repository as
+`github:zomg-corp/qr-scanner-ndh#v<version>` and compiles `src/` from source.
+
+- `src` stays in the `files` list of `package.json`. `.gitattributes` never export-ignores `src/`.
+- The admin aliases `src/qr-scanner.ts`, `src/worker.ts` and the literal `import('./qr-scanner-worker.min.js')`
+  specifier in `src/qr-scanner.ts`. Renaming any of them breaks the admin.
+- `src/` must pass both typechecks. `yarn typecheck` runs this repository's TypeScript under `strict`.
+  `yarn typecheck:admin` runs the admin's TypeScript 7.1 beta with its options (`tsconfig.admin.json`). CI runs both.
+- Released tags and their commits are never moved, deleted or force-pushed. The admin's lockfile pins the codeload
+  URL of the tagged commit, so a moved tag breaks its install.
+
+### Release
+
+1. Run `yarn build` and commit the bundles.
+2. Bump `version` in `package.json`.
+3. Merge to `main`.
+4. Push a tag `v<version>` on that commit.
+5. In the monorepo, bump the `#v<version>` ref in `frontend/admin/package.json` and run `pnpm install`.
+6. Let the monorepo's `typecheck (admin)` job be the final check.
+
+To develop against a local checkout, point the admin at it with a temporary `link:` dependency; Vite's
+`server.fs.allow` may need the checkout's path.
 
 Javascript QR Code Scanner based on [Cosmo Wolfe's javascript port](https://github.com/cozmo/jsqr) of [Google's ZXing library](https://github.com/zxing/zxing).
 
@@ -31,7 +52,7 @@ The library supports scanning a continuous video stream from a web cam as well a
 
 Original development of this library was sponsored by [nimiq](https://www.nimiq.com), world's first browser based blockchain.
 
-[<img src="https://github.com/npm-dependency-hell/qr-scanner-ndh/blob/main/assets/nimiq_logo_rgb_horizontal.svg" alt="nimiq.com" width="250">](https://nimiq.com)
+[<img src="https://github.com/zomg-corp/qr-scanner-ndh/blob/main/assets/nimiq_logo_rgb_horizontal.svg" alt="nimiq.com" width="250">](https://nimiq.com)
 
 
 ## Setup
@@ -264,9 +285,10 @@ yarn build
 The build runs Google's closure compiler, which needs Java (with `JAVA_HOME` set) where no native closure binary
 exists for the platform, such as Linux on arm64.
 
-Type check (`strict`) and tests:
+Type checks (`strict`, then the endticket admin's compiler) and tests:
 ```batch
 yarn typecheck
+yarn typecheck:admin
 yarn test
 ```
 The tests are jsQR's own unit tests and image corpus, run with the decoder's time budget switched off
