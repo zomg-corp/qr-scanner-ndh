@@ -10,6 +10,7 @@ permissions:
 jobs:
   ci:
     runs-on: ubuntu-24.04
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
@@ -19,6 +20,8 @@ jobs:
       - run: yarn install --frozen-lockfile
       # strict, as the endticket admin compiles src/ under strict
       - run: yarn typecheck
+      # The admin's own compiler and target (tsconfig.admin.json)
+      - run: yarn typecheck:admin
       - run: yarn build
       # The sourcemaps are left out: the closure plugin names an identifier in them at random.
       - name: Committed bundles match the source

@@ -2,9 +2,10 @@
   "compilerOptions": {
     "module": "esnext",
     "target": "esnext",
-    "lib": ["esnext", "dom", "dom.iterable"],
+    "lib": ["es2020", "dom", "dom.iterable"],
     "types": [],
     "strict": true,
+    "isolatedModules": true,
     "moduleResolution": "bundler",
     "noImplicitAny": true,
     "noImplicitReturns": true,
