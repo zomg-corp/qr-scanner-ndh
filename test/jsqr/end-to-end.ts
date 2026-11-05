@@ -11,9 +11,9 @@ export const SHARDS = 4;
 
 /**
  * Without its time budget (switched off in test/setup.ts) the decoder runs its whole fallback cascade on hard
- * images: up to ~40 s for one.
+ * images: up to ~40 s for one locally, about 2.5× that on a GitHub runner. The job's 15-minute cap bounds a hang.
  */
-const CORPUS_TEST_TIMEOUT_MS = 120_000;
+const CORPUS_TEST_TIMEOUT_MS = 300_000;
 
 /** Defines the end-to-end tests for every SHARDS-th image of the corpus, starting at `shard`. */
 export function describeEndToEnd(shard: number): void {

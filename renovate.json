@@ -6,6 +6,16 @@
   "packageRules": [
     {
       "description": [
+        "typescript-admin is the endticket admin's TypeScript version, used by `yarn typecheck:admin`. It is set by",
+        "hand to match frontend/admin in the monorepo, so Renovate leaves it alone."
+      ],
+      "matchDepNames": [
+        "typescript-admin"
+      ],
+      "enabled": false
+    },
+    {
+      "description": [
         "Hold npm releases for seven days, like the endticket monorepo. yarn 1 has no soak of its own, so",
         "this rule is the only one. It must stay last among the rules that match the npm datasource:",
         "config:best-practices sets three days for npm and none for some update types, and the last",

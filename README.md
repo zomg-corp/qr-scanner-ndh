@@ -20,6 +20,9 @@ The endticket admin (`frontend/admin` in the endticket monorepo) installs this r
   specifier in `src/qr-scanner.ts`. Renaming any of them breaks the admin.
 - `src/` must pass both typechecks. `yarn typecheck` runs this repository's TypeScript under `strict`.
   `yarn typecheck:admin` runs the admin's TypeScript 7.1 beta with its options (`tsconfig.admin.json`). CI runs both.
+- `typescript-admin` in `package.json` is the admin's TypeScript version, set by hand; Renovate skips it. When the
+  admin changes its TypeScript version, set `typescript-admin` to the same one. A bare `tsc` from
+  `node_modules/.bin` is that version; the scripts call each compiler by path.
 - Released tags and their commits are never moved, deleted or force-pushed. The admin's lockfile pins the codeload
   URL of the tagged commit, so a moved tag breaks its install.
 
