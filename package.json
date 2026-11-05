@@ -58,9 +58,6 @@
     "url": "https://github.com/zomg-corp/qr-scanner-ndh/issues"
   },
   "homepage": "https://github.com/zomg-corp/qr-scanner-ndh#readme",
-  "dependencies": {
-    "@types/offscreencanvas": "^2019.6.4"
-  },
   "devDependencies": {
     "@ampproject/rollup-plugin-closure-compiler": "^0.27.0",
     "@rollup/plugin-alias": "^3.1.9",
