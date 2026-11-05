@@ -1,6 +1,6 @@
 {
   "name": "qr-scanner-ndh",
-  "version": "1.4.7",
+  "version": "1.4.8",
   "description": "A javascript QR scanner library",
   "main": "qr-scanner.umd.min.js",
   "module": "qr-scanner.min.js",
