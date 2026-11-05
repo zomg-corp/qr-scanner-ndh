@@ -19,7 +19,8 @@
   ],
   "scripts": {
     "build": "rollup --config && tsc --ignoreConfig src/qr-scanner.ts --target esnext --module esnext --declaration --declarationDir types --emitDeclarationOnly",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p test/tsconfig.json",
+    "test": "vitest --run"
   },
   "repository": {
     "type": "git",
@@ -63,11 +64,15 @@
     "@ampproject/rollup-plugin-closure-compiler": "^0.27.0",
     "@rollup/plugin-alias": "^3.1.9",
     "@rollup/plugin-typescript": "^12.3.0",
+    "@types/node": "^24",
     "acorn": "^8.7.0",
     "google-closure-compiler": "^20220104.0.0",
     "rollup": "^2.80.0",
     "rollup-plugin-sourcemaps": "^0.6.2",
     "tslib": "^2.3.1",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "upng-js": "^1.0.1",
+    "vite": "8.3.5",
+    "vitest": "5.0.5"
   }
 }
