@@ -1086,11 +1086,13 @@ class QrScanner {
     ): number {
         if (!(qrEngine instanceof Worker)) return -1;
         const id = QrScanner._workerMessageId++;
+        // `?? []`: postMessage's transfer list is not optional in the DOM typings; an absent
+        // list already means [] at runtime
         qrEngine.postMessage({
             id,
             type,
             data,
-        }, transfer);
+        }, transfer ?? []);
         return id;
     }
 }
