@@ -1,6 +1,6 @@
 {
   "name": "qr-scanner-ndh",
-  "version": "1.4.6",
+  "version": "1.4.7",
   "description": "A javascript QR scanner library",
   "main": "qr-scanner.umd.min.js",
   "module": "qr-scanner.min.js",
@@ -15,7 +15,8 @@
     "qr-scanner.legacy.min.js.map",
     "qr-scanner-worker.min.js",
     "qr-scanner-worker.min.js.map",
-    "types/qr-scanner.d.ts"
+    "types/qr-scanner.d.ts",
+    "src"
   ],
   "scripts": {
     "build": "rollup --config && tsc --ignoreConfig src/qr-scanner.ts --target esnext --module esnext --declaration --declarationDir types --emitDeclarationOnly",
@@ -24,7 +25,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/npm-dependency-hell/qr-scanner-ndh.git"
+    "url": "git+https://github.com/zomg-corp/qr-scanner-ndh.git"
   },
   "keywords": [
     "qr",
@@ -54,9 +55,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/npm-dependency-hell/qr-scanner-ndh/issues"
+    "url": "https://github.com/zomg-corp/qr-scanner-ndh/issues"
   },
-  "homepage": "https://github.com/npm-dependency-hell/qr-scanner-ndh#readme",
+  "homepage": "https://github.com/zomg-corp/qr-scanner-ndh#readme",
   "dependencies": {
     "@types/offscreencanvas": "^2019.6.4"
   },

@@ -2,6 +2,18 @@
 > forked and maintained by **npm-dependency-hell**
 # QR Scanner (FORK)
 
+## This fork
+
+- The decoder is [`src/jsqr`](src/jsqr/README.md), a copy of jsQR's "modernize" branch with a 100 ms per-call time
+  budget. It replaces the `jsqr-es6` dependency. Its README lists the provenance and the local changes.
+- The endticket admin installs this repository from a GitHub tag tarball
+  (`github:zomg-corp/qr-scanner-ndh#<tag>`) and compiles `src/` from source under TypeScript `strict`.
+  So `src/` must pass `yarn typecheck`, which is `strict` too. CI runs it on every push.
+- Installing builds nothing: there is no `prepare` or `postinstall` script. The committed `*.min.js` bundles must
+  match `src/`; CI rebuilds them and fails on a difference.
+- Release: bump `version` in `package.json`, merge to `main`, push a tag `v<version>`.
+- The release tarball leaves out `test/` (`.gitattributes`), which holds jsQR's test corpus.
+
 Javascript QR Code Scanner based on [Cosmo Wolfe's javascript port](https://github.com/cozmo/jsqr) of [Google's ZXing library](https://github.com/zxing/zxing).
 
 In this library, several improvements have been applied over the original port:
@@ -249,3 +261,13 @@ Building:
 ```batch
 yarn build
 ```
+The build runs Google's closure compiler, which needs Java (with `JAVA_HOME` set) where no native closure binary
+exists for the platform, such as Linux on arm64.
+
+Type check (`strict`) and tests:
+```batch
+yarn typecheck
+yarn test
+```
+The tests are jsQR's own unit tests and image corpus, run with the decoder's time budget switched off
+(`test/setup.ts`). The slowest corpus images take tens of seconds each without it.
