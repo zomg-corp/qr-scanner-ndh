@@ -20,6 +20,7 @@ jobs:
       # strict, as the endticket admin compiles src/ under strict
       - run: yarn typecheck
       - run: yarn build
+      # The sourcemaps are left out: the closure plugin names an identifier in them at random.
       - name: Committed bundles match the source
-        run: git diff --exit-code
+        run: git diff --exit-code -- . ':(exclude)*.map'
       - run: yarn test

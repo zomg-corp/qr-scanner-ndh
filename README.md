@@ -10,7 +10,7 @@
   (`github:zomg-corp/qr-scanner-ndh#<tag>`) and compiles `src/` from source under TypeScript `strict`.
   So `src/` must pass `yarn typecheck`, which is `strict` too. CI runs it on every push.
 - Installing builds nothing: there is no `prepare` or `postinstall` script. The committed `*.min.js` bundles must
-  match `src/`; CI rebuilds them and fails on a difference.
+  match `src/`; CI rebuilds them and fails on a difference (sourcemaps excepted: one identifier in them is random).
 - Release: bump `version` in `package.json`, merge to `main`, push a tag `v<version>`.
 - The release tarball leaves out `test/` (`.gitattributes`), which holds jsQR's test corpus.
 
