@@ -1,0 +1,21 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:best-practices"
+  ],
+  "packageRules": [
+    {
+      "description": [
+        "Hold npm releases for seven days, like the endticket monorepo. yarn 1 has no soak of its own, so",
+        "this rule is the only one. It must stay last among the rules that match the npm datasource:",
+        "config:best-practices sets three days for npm and none for some update types, and the last",
+        "matching rule wins."
+      ],
+      "matchDatasources": [
+        "npm"
+      ],
+      "minimumReleaseAge": "7 days",
+      "internalChecksFilter": "strict"
+    }
+  ]
+}
