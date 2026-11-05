@@ -2,12 +2,13 @@
   "compilerOptions": {
     "module": "esnext",
     "target": "esnext",
+    "lib": ["esnext", "dom", "dom.iterable"],
     "strict": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noEmitOnError": true
-  }
+  },
+  "include": ["src"]
 }
-

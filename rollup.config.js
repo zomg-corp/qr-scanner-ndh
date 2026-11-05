@@ -34,7 +34,10 @@ export default () => [
             sourcemap: true,
         },
         plugins: [
-            typescript(),
+            // ES2015 output for closure's ECMASCRIPT6 input: the jsQR source uses class fields, `**` and `??`
+            typescript({
+                target: 'ES2015',
+            }),
             sourcemaps(),
             closureCompiler({
                 //compilation_level: 'ADVANCED',

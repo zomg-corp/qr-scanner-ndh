@@ -610,8 +610,8 @@ class QrScanner {
     }
 
     setGrayscaleWeights(red: number, green: number, blue: number, useIntegerApproximation: boolean = true): void {
-        // Note that for the native BarcodeDecoder or if the worker was destroyed, this is a no-op. However, the native
-        // implementations work also well with colored qr codes.
+        // A no-op: the worker's decoder converts to grey with fixed BT.709 luma weights, and the native
+        // BarcodeDecoder works well with colored qr codes.
         QrScanner._postWorkerMessage(
             this._qrEnginePromise,
             'grayscaleWeights',

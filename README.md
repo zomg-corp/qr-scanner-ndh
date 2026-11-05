@@ -211,7 +211,8 @@ specific color:
 ```js
 qrScanner.setGrayscaleWeights(red, green, blue, useIntegerApproximation = true);
 ```
-Where `red`, `green` and `blue` should sum up to 256 if `useIntegerApproximation === true` and `1` otherwise. By default, [these](https://en.wikipedia.org/wiki/YUV#Full_swing_for_BT.601) values are used.
+In this fork the call has no effect: the decoder in `src/jsqr` converts to grayscale with fixed BT.709 luma weights.
+The method stays for API compatibility.
 
 ### Flashlight support
 
